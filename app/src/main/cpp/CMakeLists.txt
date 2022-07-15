@@ -7,11 +7,12 @@ cmake_minimum_required(VERSION 3.18.1)
 
 # Declares and names the project.
 project("jnidemo"
-        VERSION   0.1
+        VERSION 0.1
         LANGUAGES CXX
         )
 
-set(HUAWEI_SDK "/Users/eason/SDK/huawei")
+#set(HUAWEI_SDK "/Users/eason/SDK/huawei")
+set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
