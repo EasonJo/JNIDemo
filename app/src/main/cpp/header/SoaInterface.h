@@ -30,6 +30,11 @@ public:
      * @return
      */
     virtual int getHacLevel() = 0;
+
+    /**
+     * 测试用
+     */
+    virtual void doTest() = 0;
 };
 
 /**

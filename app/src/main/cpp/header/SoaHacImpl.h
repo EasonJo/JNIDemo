@@ -22,6 +22,9 @@ public:
     virtual float getTemperature() override;
 
     virtual int getHacLevel() override;
+
+    void doTest() override;
+
 };
 
 #endif //JNIDEMO_SOAHACIMPL_H

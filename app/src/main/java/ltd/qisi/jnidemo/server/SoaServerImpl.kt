@@ -1,5 +1,6 @@
 package ltd.qisi.jnidemo.server
 
+import android.util.Log
 import ltd.qisi.jnidemo.SoaServerInterface
 
 /**
@@ -8,7 +9,13 @@ import ltd.qisi.jnidemo.SoaServerInterface
 class SoaServerImpl : SoaServerInterface {
 
     private var i = 0
-    override fun getAndroidVersion(): Int = i++
+    override fun getAndroidVersion(): Int {
+        Log.d("SoaServerImpl", "GetAndroidVersion ThreadID: ${Thread.currentThread().id}")
+        return i++
+    }
 
-    override fun getAndroidName(): String = "SOA Server From APP: ${++i}"
+    override fun getAndroidName(): String {
+        Log.d("SoaServerImpl", "GetAndroidName ThreadID: ${Thread.currentThread().id}")
+        return "SOA Server From APP: ${++i}"
+    }
 }

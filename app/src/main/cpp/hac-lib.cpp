@@ -3,7 +3,9 @@
 #include "header/commonDef.h"
 #include "header/SoaInterface.h"
 #include "header/SoaHacImpl.h"
+#include "header/Utils.h"
 #include <thread>
+#include <sstream>
 
 //
 // Created by Eason on 2022/7/14.
@@ -19,6 +21,7 @@ jobject soa_server_interface = nullptr;
 //全局对象
 std::shared_ptr<SoaHACInterface> soaHac = nullptr;
 
+extern "C"
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     //javaVm = vm;
     LOGI("JNI_OnLoad!");
@@ -102,6 +105,10 @@ std::string call_from_thread(jobject jObj, const Callback &pFunction) {
 }
 
 void run() {
+
+    const std::__thread_id &threadId = std::this_thread::get_id();
+    LOGD("Native Thread ID: %s", getThreadIdOfString(threadId).c_str());
+
     std::string a = call_from_thread(
             pJobject,
             [](JNIEnv *env, jobject jobject1) -> std::string {
@@ -190,11 +197,12 @@ Java_ltd_qisi_jnidemo_SoaHACManager_doMethod(JNIEnv *env, jobject thiz, jstring 
     std::string method = s;
     LOGI("do method call %s to soa server!", std::string(s).c_str());
     //todo 用枚举或者内置基本类型
-    if (method == "HACTemperature") {
-        auto t = soaHac->getTemperature();
-        LOGD("HAC Temperature is %f", t);
-    } else if (method == "HAC_LEVEL") {
-        auto l = soaHac->getHacLevel();
-        LOGD("HAC LEVEL is %d", l);
-    }
+//    if (method == "HACTemperature") {
+//        auto t = soaHac->getTemperature();
+//        LOGD("HAC Temperature is %f", t);
+//    } else if (method == "HAC_LEVEL") {
+//        auto l = soaHac->getHacLevel();
+//        LOGD("HAC LEVEL is %d", l);
+//    }
+    soaHac->doTest();
 }

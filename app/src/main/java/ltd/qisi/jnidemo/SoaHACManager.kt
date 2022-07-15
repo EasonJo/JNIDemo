@@ -1,10 +1,5 @@
 package ltd.qisi.jnidemo
 
-enum class Method {
-    GET_TEMPERATURE,
-    GET_HAC_LEVEL
-}
-
 class SoaHACManager {
 
     /**

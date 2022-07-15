@@ -14,6 +14,10 @@ project("jnidemo")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+#批量查询到.c .h .cpp文件
+#file(GLOB allCpp *.c *.h *.cpp *.hpp)
+include_directories(${CMAKE_SOURCE_DIR}/header)
+
 add_library( # Sets the name of the library.
         window_soa
         # Sets the library as a shared library.
@@ -27,6 +31,18 @@ add_library( # Sets the name of the library.
         SHARED
         # Provides a relative path to your source file(s).
         hac-lib.cpp SoaHacImpl.cpp)
+
+## 添加第三方库
+add_library(soa_ap
+        SHARED
+        IMPORTED)
+set_target_properties(
+        soa_ap
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/libs/libCalculatorClient.so)
+
+message("${CMAKE_SOURCE_DIR}")
+message("${ANDROID_ABI}")
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -47,14 +63,14 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         window_soa
-
+        soa_ap
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
 
 target_link_libraries( # Specifies the target library.
         hac_soa
-
+        soa_ap
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
