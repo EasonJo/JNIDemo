@@ -6,9 +6,12 @@
 cmake_minimum_required(VERSION 3.18.1)
 
 # Declares and names the project.
+project("jnidemo"
+        VERSION   0.1
+        LANGUAGES CXX
+        )
 
-project("jnidemo")
-
+set(HUAWEI_SDK "/Users/eason/SDK/huawei")
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -17,6 +20,8 @@ project("jnidemo")
 #批量查询到.c .h .cpp文件
 #file(GLOB allCpp *.c *.h *.cpp *.hpp)
 include_directories(${CMAKE_SOURCE_DIR}/header)
+include_directories(${CMAKE_SOURCE_DIR}/includes)
+include_directories(${HUAWEI_SDK}/include)
 
 add_library( # Sets the name of the library.
         window_soa
