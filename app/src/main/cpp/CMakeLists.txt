@@ -19,14 +19,14 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        window-lib.cpp)
+        window-lib.cpp SoaWindowsImpl.cpp)
 
 add_library( # Sets the name of the library.
         hac_soa
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        hac-lib.cpp)
+        hac-lib.cpp SoaHacImpl.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

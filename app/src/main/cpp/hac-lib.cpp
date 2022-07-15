@@ -1,6 +1,8 @@
 #include <jni.h>
 #include <string>
-#include "commonDef.h"
+#include "header/commonDef.h"
+#include "header/SoaInterface.h"
+#include "header/SoaHacImpl.h"
 #include <thread>
 
 //
@@ -14,8 +16,11 @@ jobject pJobject = nullptr;
 
 jobject soa_server_interface = nullptr;
 
+//全局对象
+std::shared_ptr<SoaHACInterface> soaHac = nullptr;
+
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
-    javaVm = vm;
+    //javaVm = vm;
     LOGI("JNI_OnLoad!");
     return JNI_VERSION_1_6;
 }
@@ -24,8 +29,12 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_ltd_qisi_jnidemo_SoaHACManager_initService(JNIEnv *env, jobject thiz) {
     LOGI("init HAC soa native");
-    env->GetJavaVM(&javaVm); //保存全局对象
-    pJobject = env->NewGlobalRef(thiz);
+    env->GetJavaVM(&javaVm); //保存全局JavaVM对象
+    ::pJobject = env->NewGlobalRef(thiz);
+    //初始化SoaHacImpl对象
+    ::soaHac = std::shared_ptr<SoaHACInterface>(new SoaHacImpl());
+    //todo 发布与订阅服务,执行初始化动作
+    ::soaHac->initSoaHAC();
 }
 
 extern "C"
@@ -46,30 +55,20 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_ltd_qisi_jnidemo_SoaHACManager_sendEvent(JNIEnv *env, jobject thiz, jint event) {
     //do sent soaEvent
+    //todo 调用soa发送event的能力
     LOGI("send event %d to soa server!", event);
 }
 
 extern void testCallBack();
 
 extern "C"
-JNIEXPORT jint JNICALL
-Java_ltd_qisi_jnidemo_SoaHACManager_getHACStatus(JNIEnv *env, jobject thiz) {
+JNIEXPORT void JNICALL
+Java_ltd_qisi_jnidemo_SoaHACManager_testJniCallBack(JNIEnv *env, jobject thiz) {
     //从 SOA 读取 HAC 的状态,返回给应用层
     testCallBack();
-    return 1;
-}
-extern "C"
-JNIEXPORT void JNICALL
-Java_ltd_qisi_jnidemo_SoaHACManager_doMethod(JNIEnv *env, jobject thiz, jstring pJstring) {
-    //method call.
-    auto s = env->GetStringUTFChars(pJstring, 0);
-    LOGI("do method call %s to soa server!", std::string(s).c_str());
 }
 
 bool mNeedDetach = JNI_FALSE;
-
-//定义一个回调函数
-using Callback = std::function<std::string(JNIEnv *env, jobject jObj)>;
 
 std::string call_from_thread(jobject jObj, const Callback &pFunction) {
     //从 Java 层获取 value
@@ -115,18 +114,14 @@ void run() {
                 }
 
                 //获取要回调的方法ID
-                jmethodID javaCallbackId = env->GetMethodID(javaClass,
-                                                            "serverImpl",
-                                                            "(I)Ljava/lang/String;");
-//        jmethodID javaCallbackId1 = env->GetMethodID(javaClass,
-//                                                    "serverImpl", "()I");
+                jmethodID javaCallbackId = env->GetMethodID(javaClass, "serverImpl", "(I)Ljava/lang/String;");
+                //jmethodID javaCallbackId1 = env->GetMethodID(javaClass, "serverImpl", "()I");
                 if (javaCallbackId == nullptr) {
                     LOGD("Unable to find method:serverImpl");
                     return "";
                 }
                 //执行回调
-//                jstring method = static_cast<jstring>(env->CallObjectMethod(
-//                        pJobject, javaCallbackId, 1));
+                //jstring method = static_cast<jstring>(env->CallObjectMethod(pJobject, javaCallbackId, 1));
                 auto method = (jstring) env->CallObjectMethod(pJobject, javaCallbackId, 1);
                 const char *result = env->GetStringUTFChars(method, 0);
                 return {result};
@@ -144,9 +139,8 @@ void run() {
                     javaVm->DetachCurrentThread();
                     return "";
                 }
-                jmethodID getAndroidVersion = env->GetMethodID(soa_interface, "getAndroidVersion","()I");
-                jmethodID getAndroidName = env->GetMethodID(soa_interface, "getAndroidName",
-                                                            "()Ljava/lang/String;");
+                jmethodID getAndroidVersion = env->GetMethodID(soa_interface, "getAndroidVersion", "()I");
+                jmethodID getAndroidName = env->GetMethodID(soa_interface, "getAndroidName", "()Ljava/lang/String;");
                 if (getAndroidVersion == nullptr || getAndroidName == nullptr) {
                     LOGW("Unable to find method:getAndroidVersion or getAndroidName");
                     return "";
@@ -166,10 +160,41 @@ void testCallBack() {
     thread.detach();
 }
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_ltd_qisi_jnidemo_SoaHACManager_setSoaServiceImpl(JNIEnv *env, jobject thiz, jobject soaServerInterface) {
+    ::soa_server_interface = env->NewGlobalRef(soaServerInterface);
+}
+extern "C"
+JNIEXPORT jfloat JNICALL
+Java_ltd_qisi_jnidemo_SoaHACManager_getTemperature(JNIEnv *env, jobject thiz) {
+    // 获取温度
+    return soaHac->getTemperature();
+}
+extern "C"
+JNIEXPORT jint JNICALL
+Java_ltd_qisi_jnidemo_SoaHACManager_getHACLevel(JNIEnv *env, jobject thiz) {
+    // 获取风量等级
+    return soaHac->getHacLevel();
+}
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_ltd_qisi_jnidemo_SoaHACManager_setSoaServiceImpl(JNIEnv *env, jobject thiz,
-                                                      jobject soaServerInterface) {
-    ::soa_server_interface = env->NewGlobalRef(soaServerInterface);
+Java_ltd_qisi_jnidemo_SoaHACManager_doMethod(JNIEnv *env, jobject thiz, jstring pJstring) {
+    if (soaHac == nullptr) {
+        LOGE("SOA IMPL is NULL.");
+        return;
+    }
+    //method call.
+    const char *s = env->GetStringUTFChars(pJstring, 0);
+    std::string method = s;
+    LOGI("do method call %s to soa server!", std::string(s).c_str());
+    //todo 用枚举或者内置基本类型
+    if (method == "HACTemperature") {
+        auto t = soaHac->getTemperature();
+        LOGD("HAC Temperature is %f", t);
+    } else if (method == "HAC_LEVEL") {
+        auto l = soaHac->getHacLevel();
+        LOGD("HAC LEVEL is %d", l);
+    }
 }

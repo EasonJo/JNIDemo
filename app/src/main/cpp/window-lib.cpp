@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <string>
-#include "commonDef.h"
+#include "header/commonDef.h"
 
 /**
  * Print android log

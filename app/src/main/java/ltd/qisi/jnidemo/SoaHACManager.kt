@@ -1,5 +1,10 @@
 package ltd.qisi.jnidemo
 
+enum class Method {
+    GET_TEMPERATURE,
+    GET_HAC_LEVEL
+}
+
 class SoaHACManager {
 
     /**
@@ -11,7 +16,6 @@ class SoaHACManager {
                 sendEvent(value)
             }
         }
-        get() = getHACStatus()
 
     /**
      * A native method that is implemented by the 'jnidemo' native library,
@@ -32,11 +36,15 @@ class SoaHACManager {
     /**
      * 方法 Call
      */
-    external fun doMethod(string: String)
+    external fun doMethod(method: String)
+
+    external fun getTemperature(): Float
+
+    external fun getHACLevel(): Int
 
     private external fun sendEvent(event: Int)
 
-    private external fun getHACStatus(): Int
+    external fun testJniCallBack()
 
     /**
      * 将能力暴露给其他域,APP 作为 Server,在soaServerInterface中提供API实现.
