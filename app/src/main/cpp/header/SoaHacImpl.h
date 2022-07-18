@@ -15,7 +15,7 @@ public:
 
     explicit SoaHacImpl();
 
-    ~SoaHacImpl() override;
+    //~SoaHacImpl() override;
 
     void initSoaHAC() override;
 

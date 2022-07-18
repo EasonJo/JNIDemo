@@ -25,10 +25,10 @@ void SoaHacImpl::initSoaHAC() {
     LOGD("initSoaHAC......");
 }
 
-SoaHacImpl::~SoaHacImpl() {
-    LOGI("~SoaHacImpl");
-    //释放资源
-}
+//SoaHacImpl::~SoaHacImpl() {
+//    LOGI("~SoaHacImpl");
+//    //释放资源
+//}
 
 SoaHacImpl::SoaHacImpl() {
     //todo 初始化

@@ -10,7 +10,7 @@
 
 class SoaWindowsImpl : public SoaWindowsInterface {
 public:
-    ~SoaWindowsImpl() override;
+    //~SoaWindowsImpl() override;
 
     void initSoaWindows() override;
 

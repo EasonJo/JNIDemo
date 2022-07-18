@@ -24,6 +24,6 @@ void SoaWindowsImpl::initSoaWindows() {
 
 }
 
-SoaWindowsImpl::~SoaWindowsImpl() {
-    LOGI("~SoaWindowsImpl");
-}
+//SoaWindowsImpl::~SoaWindowsImpl() {
+//    LOGI("~SoaWindowsImpl");
+//}
