@@ -1,3 +1,5 @@
+#define LOG_TAG "HAC_SOA_NATIVE"
+
 #include <jni.h>
 #include <string>
 #include "header/commonDef.h"
@@ -11,7 +13,6 @@
 // Created by Eason on 2022/7/14.
 //
 
-#define LOG_TAG "HAC_SOA_NATIVE"
 
 JavaVM *javaVm = nullptr; //全局指针,用于保存JNI对象
 jobject pJobject = nullptr;

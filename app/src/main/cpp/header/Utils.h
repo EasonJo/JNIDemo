@@ -27,10 +27,5 @@ static inline std::string getThreadIdOfString(const std::thread::id &id) {
 static inline ULL getThreadIdOfULL(const std::thread::id &id) {
     return std::stoull(getThreadIdOfString(id));
 }
-
-static inline std::string get_thread_id() {
-
-}
-
 __END_DECLS
 #endif //JNIDEMO_UTILS_H

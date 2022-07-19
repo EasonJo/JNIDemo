@@ -11,8 +11,8 @@ project("jnidemo"
         LANGUAGES CXX
         )
 #需要修改此变量
-set(HUAWEI_SDK "/Users/eason/SDK/huawei")
-#set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
+#set(HUAWEI_SDK "/Users/eason/SDK/huawei")
+set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
