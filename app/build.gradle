@@ -25,6 +25,12 @@ android {
         }
     }
 
+    sourceSets{
+        main{
+            jniLibs.srcDirs=['libs']
+        }
+    }
+
     ndkVersion "22.1.7171670"
 
     buildTypes {

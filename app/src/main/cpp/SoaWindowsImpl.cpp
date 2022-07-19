@@ -1,7 +1,6 @@
 //
 // Created by eason on 2022/7/15.
 //
-
 #define LOG_TAG "SoaWindowsImpl"
 
 #include "header/SoaWindowsImpl.h"

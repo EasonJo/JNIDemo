@@ -5,14 +5,15 @@
 #ifndef JNIDEMO_SOAINTERFACE_H
 #define JNIDEMO_SOAINTERFACE_H
 
-
 /**
  * 空调相关的接口声明
  */
 class SoaHACInterface {
 public:
     //基类虚析构函数必须提供实现，如果声明为纯虚析构函数，也必须提供单独的实现
-    virtual ~SoaHACInterface() {};
+    virtual ~SoaHACInterface() = default;
+    //另外一种写法
+    //virtual ~SoaHACInterface(){};
 
     /**
      * 执行初始化动作
@@ -43,7 +44,9 @@ public:
 class SoaWindowsInterface {
 public:
     //基类虚析构函数必须提供实现，如果声明为纯虚析构函数，也必须提供单独的实现
-    virtual ~SoaWindowsInterface() {};
+    virtual ~SoaWindowsInterface() = default;
+    //另外一种写法
+    //virtual ~SoaWindowsInterface() {};
 
     /**
      * 执行初始化动作

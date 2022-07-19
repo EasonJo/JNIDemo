@@ -8,19 +8,17 @@
 #include "header/Utils.h"
 #include <thread>
 #include <sstream>
+#include <cassert>
 
 //
 // Created by Eason on 2022/7/14.
 //
 
-
-JavaVM *javaVm = nullptr; //全局指针,用于保存JNI对象
-jobject pJobject = nullptr;
-
-jobject soa_server_interface = nullptr;
-
+static JavaVM *javaVm = nullptr; //全局指针,用于保存JNI对象
+static jobject pJobject = nullptr;
+static jobject soa_server_interface = nullptr;
 //全局对象
-std::shared_ptr<SoaHACInterface> soaHac = nullptr;
+static std::shared_ptr<SoaHACInterface> soaHac = nullptr;
 
 extern "C"
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -87,7 +85,7 @@ std::string call_from_thread(jobject jObj, const Callback &pFunction) {
         mNeedDetach = JNI_TRUE;
     }
 
-    if (jObj == nullptr || javaVm == nullptr) {
+    if (jObj == nullptr) {
         LOGE("pJobject is Null!!!");
         return "";
     }
@@ -106,7 +104,6 @@ std::string call_from_thread(jobject jObj, const Callback &pFunction) {
 }
 
 void run() {
-
     const std::__thread_id &threadId = std::this_thread::get_id();
     LOGD("Native Thread ID: %s", getThreadIdOfString(threadId).c_str());
 
@@ -176,12 +173,14 @@ Java_ltd_qisi_jnidemo_SoaHACManager_setSoaServiceImpl(JNIEnv *env, jobject thiz,
 extern "C"
 JNIEXPORT jfloat JNICALL
 Java_ltd_qisi_jnidemo_SoaHACManager_getTemperature(JNIEnv *env, jobject thiz) {
+    assert(::soaHac != nullptr);
     // 获取温度
     return soaHac->getTemperature();
 }
 extern "C"
 JNIEXPORT jint JNICALL
 Java_ltd_qisi_jnidemo_SoaHACManager_getHACLevel(JNIEnv *env, jobject thiz) {
+    assert(::soaHac != nullptr);
     // 获取风量等级
     return soaHac->getHacLevel();
 }

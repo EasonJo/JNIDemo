@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity() {
                 info.append("HAC temperature: $temperature\n")
             }
             binding.windows -> {
-                //val stringFromJNI = soaWindowManager.stringFromJNI()
+                val stringFromJNI = soaWindowManager.stringFromJNI()
                 //测试
-                hacManager.doMethod("Test")
+//                hacManager.doMethod("Test")
             }
 
             binding.initCallback -> {
@@ -58,6 +58,11 @@ class MainActivity : AppCompatActivity() {
                 hacManager.testJniCallBack()
 
             }
+
+            binding.apCall -> {
+                hacManager.doMethod("Test")
+            }
+
         }
     }
 }

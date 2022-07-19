@@ -1,7 +1,6 @@
 //
 // Created by eason on 2022/7/15.
 //
-
 #define LOG_TAG "SoaHacImpl"
 
 #include "header/calculator_client.h"
@@ -38,6 +37,8 @@ SoaHacImpl::SoaHacImpl() {
 }
 
 void SoaHacImpl::doTest() {
+    LOGI("Jus Do Test");
+
     CalculatorClient::ClientAct clientAct;
     std::thread t([&]() {
 //        auto a = const_cast<CalculatorClient::ClientAct *>(&clientAct);

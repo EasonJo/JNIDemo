@@ -53,5 +53,14 @@
         app:layout_constraintStart_toStartOf="@+id/windows"
         app:layout_constraintTop_toBottomOf="@+id/windows" />
 
+    <Button
+        android:id="@+id/ap_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Test AP Call"
+        app:layout_constraintStart_toStartOf="@+id/init_callback"
+        app:layout_constraintTop_toBottomOf="@+id/init_callback" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

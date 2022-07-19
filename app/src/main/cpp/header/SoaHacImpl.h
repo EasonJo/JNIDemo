@@ -17,11 +17,11 @@ public:
 
     ~SoaHacImpl() override;
 
-    virtual void initSoaHAC() override;
+    void initSoaHAC() override;
 
-    virtual float getTemperature() override;
+    float getTemperature() override;
 
-    virtual int getHacLevel() override;
+    int getHacLevel() override;
 
     void doTest() override;
 

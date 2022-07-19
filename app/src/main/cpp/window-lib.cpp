@@ -1,4 +1,3 @@
-//需要放到文件最上面,因为头文件中回去判断这个宏是否存在,不存在就使用默认的TAG.
 #define LOG_TAG "WINDOWS_SOA_NATIVE"
 
 #include <jni.h>
