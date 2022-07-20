@@ -25,6 +25,7 @@ android {
         }
     }
 
+    //如果使用系统预编译的so，则注释掉此段代码
     sourceSets{
         main{
             jniLibs.srcDirs=['libs']

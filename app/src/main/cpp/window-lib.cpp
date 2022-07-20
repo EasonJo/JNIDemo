@@ -13,7 +13,7 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_ltd_qisi_jnidemo_SoaWindowManager_stringFromJNI(JNIEnv *env, jobject thiz) {
     std::string hello = "Hello From Window SOA C++";
-    LOGI("init Window soa native!");
+    //LOGI("init Window soa native!");
     return env->NewStringUTF(hello.c_str());
 }
 extern "C"

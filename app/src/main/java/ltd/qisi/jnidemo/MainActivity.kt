@@ -51,19 +51,21 @@ class MainActivity : AppCompatActivity() {
             }
             binding.windows -> {
                 val stringFromJNI = soaWindowManager.stringFromJNI()
+                info.append("$stringFromJNI\n")
                 //测试
-//                hacManager.doMethod("Test")
-                doRPCTest()
+                //hacManager.doMethod("Test")
             }
 
             binding.initCallback -> {
                 //JNI会回调SosServerImpl类
                 hacManager.testJniCallBack()
-
             }
 
             binding.apCall -> {
                 hacManager.doMethod("Test")
+            }
+            binding.halCal -> {
+                doRPCTest()
             }
 
         }
