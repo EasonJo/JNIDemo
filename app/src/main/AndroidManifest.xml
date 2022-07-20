@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JNIDemo"
         tools:targetApi="31">
-        <uses-native-library
-            android:name="dlt"
-            android:required="true" />
+        <uses-native-library android:name="dlt" android:required="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
