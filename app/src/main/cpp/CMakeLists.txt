@@ -10,7 +10,7 @@ project("jnidemo"
         VERSION 0.1
         LANGUAGES CXX
         )
-#需要修改此变量
+#需要修改此变量，指定你的电脑上SDK的路径
 #set(HUAWEI_SDK /Users/eason/SDK/huawei)
 set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 # Creates and names a library, sets it as either STATIC
