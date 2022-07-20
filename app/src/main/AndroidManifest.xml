@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ltd.qisi.jnidemo">
 
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JNIDemo"
         tools:targetApi="31">
+        <uses-native-library
+            android:name="dlt"
+            android:required="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

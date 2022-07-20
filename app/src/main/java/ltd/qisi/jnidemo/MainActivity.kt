@@ -1,11 +1,13 @@
 package ltd.qisi.jnidemo
 
 import android.os.Bundle
+import android.os.ServiceManager
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import ltd.qisi.jnidemo.databinding.ActivityMainBinding
 import ltd.qisi.jnidemo.server.SoaServerImpl
+import ltd.qisi.soa.ISoaCall
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 val stringFromJNI = soaWindowManager.stringFromJNI()
                 //测试
 //                hacManager.doMethod("Test")
+                doRPCTest()
             }
 
             binding.initCallback -> {
@@ -65,4 +68,16 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    private var i = 0;
+    private fun doRPCTest() {
+        val service = ServiceManager.getService("ltd.qisi.soa.ISoaCall/default")
+        if (service != null) {
+            val soaCall = ISoaCall.Stub.asInterface(service)
+            soaCall.sendEvent(i++)
+            val value = soaCall.getValue("Call From APP")
+            info.append("Get Value Form HAL: $value\n")
+        }
+    }
+
 }

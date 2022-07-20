@@ -59,7 +59,8 @@ android {
 }
 
 dependencies {
-
+    compileOnly files('../build_env_common/google/framework.jar')
+    implementation files('../build_env_common/qisi_soa_proxy-V1-java.jar')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
