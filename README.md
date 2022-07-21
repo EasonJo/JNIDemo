@@ -18,10 +18,10 @@ SOA架构下的JNI学习Demo
 
 ## 添加其他原生库
 
-同时在系统中增加三方的SO，需要为期配置白名单，并且提供64和32位的库 参考官方文档：
+同时在系统中增加三方的SO，需要为其配置白名单，并且提供64和32位的库 参考官方文档：
 [添加其他原生库](https://source.android.com/devices/tech/config/namespaces_libraries?hl=zh-cn#adding-additional-native-libraries)
 
-如果不再APP中集成这些依赖的SO,则需要将这些SO预编译到ROM中,路径为: vendor/lib64,vendor/lib,并修改vendor/etc/public.libraries.txt文件,添加需要暴露的so文件
+如果不在APP中集成这些依赖的SO,则需要将这些SO预编译到ROM中,路径为: vendor/lib64,vendor/lib,并修改vendor/etc/public.libraries.txt文件,添加需要暴露的so文件
 ```shell
 libqti-perfd-client.so
 libadsprpc.so
@@ -65,5 +65,5 @@ libvrtf_vcc.so
 set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 ```
 
-3. Sync代码,检查头文件是否还报错,如果报错,则证明include的路径有问题,继续分析sdk的路径是否正确;
-4. sync build;
+4. Sync代码,检查头文件是否还报错,如果报错,则证明include的路径有问题,继续分析sdk的路径是否正确;
+5. sync build;
