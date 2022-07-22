@@ -39,13 +39,25 @@ SoaHacImpl::SoaHacImpl() {
 void SoaHacImpl::doTest() {
     LOGI("Jus Do Test");
 
+    char *cm_log_level = getenv("CM_LOG_LEVEL");
+    char *cm_log_type = getenv("CM_LOG_TYPE");
+    char *cm_config_file_path = getenv("CM_CONFIG_FILE_PATH");
+    char *someip_config_file = getenv("SOMEIP_CONFIG_FILE");
+
+    LOGI("CM_LOG_LEVEL: %s", cm_log_level);
+    LOGI("CM_LOG_TYPE: %s", cm_log_type);
+    LOGI("CM_CONFIG_FILE_PATH: %s", cm_config_file_path);
+    LOGI("SOMEIP_CONFIG_FILE: %s", someip_config_file);
+
+    //设置环境变量
+    //setenv("CM_CONFIG_FILE_PATH", "",0);
+    //setenv("SOMEIP_CONFIG_FILE", "",0);
     CalculatorClient::ClientAct clientAct;
     std::thread t([&]() {
-//        auto a = const_cast<CalculatorClient::ClientAct *>(&clientAct);
         clientAct.Init();
-        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        std::this_thread::sleep_for(std::chrono::seconds(10));
         clientAct.Act();
-        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        std::this_thread::sleep_for(std::chrono::seconds(20));
         clientAct.Stop();
     });
     t.detach();
