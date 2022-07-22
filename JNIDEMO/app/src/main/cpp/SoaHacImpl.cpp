@@ -8,6 +8,7 @@
 #include "header/SoaInterface.h"
 #include "header/commonDef.h"
 #include "header/SoaHacImpl.h"
+#include "header/Utils.h"
 
 float SoaHacImpl::getTemperature() {
     LOGI("Read HAC temperature form HAC.");
@@ -38,20 +39,7 @@ SoaHacImpl::SoaHacImpl() {
 
 void SoaHacImpl::doTest() {
     LOGI("Jus Do Test");
-
-    char *cm_log_level = getenv("CM_LOG_LEVEL");
-    char *cm_log_type = getenv("CM_LOG_TYPE");
-    char *cm_config_file_path = getenv("CM_CONFIG_FILE_PATH");
-    char *someip_config_file = getenv("SOMEIP_CONFIG_FILE");
-
-    LOGI("CM_LOG_LEVEL: %s", cm_log_level);
-    LOGI("CM_LOG_TYPE: %s", cm_log_type);
-    LOGI("CM_CONFIG_FILE_PATH: %s", cm_config_file_path);
-    LOGI("SOMEIP_CONFIG_FILE: %s", someip_config_file);
-
-    //设置环境变量
-    //setenv("CM_CONFIG_FILE_PATH", "",0);
-    //setenv("SOMEIP_CONFIG_FILE", "",0);
+    Utils::set_evn();
     CalculatorClient::ClientAct clientAct;
     std::thread t([&]() {
         clientAct.Init();

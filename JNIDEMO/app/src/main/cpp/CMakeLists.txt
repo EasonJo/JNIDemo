@@ -12,6 +12,7 @@ project("jnidemo"
         )
 #需要修改此变量，指定你的电脑上SDK的路径
 set(HUAWEI_SDK /Users/eason/SDK/huawei)
+#set(HUAWEI_SDK $ENV{HUAWEI_SDK})
 #set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -31,14 +32,14 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        window-lib.cpp SoaWindowsImpl.cpp)
+        window-lib.cpp SoaWindowsImpl.cpp src/Utils.cpp)
 
 add_library( # Sets the name of the library.
         hac_soa
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        hac-lib.cpp SoaHacImpl.cpp)
+        hac-lib.cpp SoaHacImpl.cpp src/Utils.cpp)
 
 ## 添加第三方库
 add_library(soa_ap

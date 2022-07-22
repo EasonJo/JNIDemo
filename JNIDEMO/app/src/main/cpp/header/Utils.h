@@ -28,5 +28,10 @@ static inline ULL getThreadIdOfULL(const std::thread::id &id) {
     return std::stoull(getThreadIdOfString(id));
 }
 
+class Utils {
+public:
+    static void set_evn();
+};
+
 __END_DECLS
 #endif //JNIDEMO_UTILS_H
