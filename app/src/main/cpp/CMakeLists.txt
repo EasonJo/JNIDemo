@@ -17,7 +17,9 @@ set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-lambda-capture")
 #批量查询到.c .h .cpp文件
 #file(GLOB allCpp *.c *.h *.cpp *.hpp)
 include_directories(${CMAKE_SOURCE_DIR}/header)
