@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ltd.qisi.jnidemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JNIDemo"
         tools:targetApi="31">
-<!--        <uses-native-library android:name="dlt" android:required="true" />-->
-<!--        <uses-native-library android:name="ara_com" android:required="true" />-->
-<!--        <uses-native-library android:name="JsonParser" android:required="true" />-->
+        <uses-native-library
+            android:name="dlt"
+            android:required="true" />
+        <!-- <uses-native-library android:name="ara_com" android:required="true" />-->
+        <!-- <uses-native-library android:name="JsonParser" android:required="true" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true">

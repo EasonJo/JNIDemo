@@ -25,10 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        soaWindowManager = SoaWindowManager()
         hacManager = SoaHACManager()
         hacManager.initService()
         hacManager.setSoaServiceImpl(soaServerInterface)
+
+        soaWindowManager = SoaWindowManager()
 
         info = binding.sampleText
         // Example of a call to a native method
