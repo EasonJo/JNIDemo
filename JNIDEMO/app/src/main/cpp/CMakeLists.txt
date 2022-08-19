@@ -13,7 +13,7 @@ project("jnidemo"
 #需要修改此变量，指定你的电脑上SDK的路径
 #set(HUAWEI_SDK /Users/eason/SDK/huawei)
 #set(HUAWEI_SDK $ENV{HUAWEI_SDK})
-set(HUAWEI_SDK /home/eason/Android/huawei_sdk)
+set(HUAWEI_SDK /home/eason/SDK/huawei_sdk)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -50,14 +50,14 @@ set_target_properties(
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_SOURCE_DIR}/libs/libCalculatorClient.so)
 ## 添加第三方库
-add_library(
+#[[add_library(
         libc++
         SHARED
         IMPORTED)
 set_target_properties(
         libc++
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/libs/libc++.so)
+        ${CMAKE_SOURCE_DIR}/libs/libc++.so)]]
 
 message("${CMAKE_SOURCE_DIR}")
 message("${ANDROID_ABI}")
@@ -82,7 +82,7 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
         window_soa
         soa_ap
-        libc++
+#        libc++
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
@@ -90,7 +90,7 @@ target_link_libraries( # Specifies the target library.
 target_link_libraries( # Specifies the target library.
         hac_soa
         soa_ap
-        libc++
+#        libc++
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
